@@ -4,12 +4,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                 sh 'mvn clean install'
+                 sh 'mvn clean install -Pjenkins -Dmaven.test.skip=true'
             }
         }
         stage('Test') {
             steps {
-                echo 'Running Test Phase. Thanks.'
+                sh 'mvn verify jacoco:report-aggregate -Dmaven.test.skip=false'
             }
         }
     }   
